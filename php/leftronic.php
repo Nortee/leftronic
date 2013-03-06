@@ -105,6 +105,16 @@ class Leftronic {
 		$this->postData($jsonData);
 	}
 
+	public function pushImage($streamName, $imgurl) {
+		### Pushing a remote image to an image widget
+		$parameters = array('accessKey' => $this->accessKey, 'streamName' => $streamName, 'point' => array(
+			'imgUrl' => $imgurl));
+		# Convert to JSON
+		$jsonData = json_encode($parameters);
+		# Make request
+		$this->postData($jsonData);
+	}
+
 	public function postData($data) {
 		### Makes an HTTP POST with JSON data
 		$ch = curl_init();
