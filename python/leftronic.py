@@ -3,6 +3,7 @@
 #except:
 #    print 'Could not import eventlet. Please install eventlet on your machine if you wish to use our asynchronous API.'
 #    import urllib2
+import logging
 import urllib2
 try:
     import json
@@ -15,6 +16,9 @@ try:
     import base64
 except:
     print 'Could not import the PyCrypto library. Please `pip install pycrypto` if you wish to encrypt your outgoing data.'
+
+
+log = logging.getLogger(__name__)
 
 
 class Leftronic(object):
@@ -254,8 +258,8 @@ class Leftronic(object):
 
         # Convert to JSON
         jsonData = json.dumps(parameters)
+        log.debug(jsonData)
 
-        print jsonData
         # Make request
         response = urllib2.urlopen(self.apiUrl, jsonData)
         return response.read()
